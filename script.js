@@ -1,31 +1,36 @@
 /* =======================================================
-   Project: Online Quiz Maker (NO REDIRECTS - OPEN MODE)
+   Project: Online Quiz Maker (OPEN ACCESS VERSION)
+   Status: NO REDIRECT LOOPS
    ======================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    // 1. GET USER
+    // 1. GET CURRENT USER
     let current_user = localStorage.getItem("quizCurrentUser");
-    
-    // 2. CHECK PAGE
-    const authForm = document.getElementById("authForm"); // Exists only on Login Page
-    const welcomeMsg = document.getElementById("welcomeMsg"); // Exists on Dashboard
+    console.log("Current User:", current_user);
+
+    // 2. CHECK WHICH PAGE WE ARE ON
+    const authForm = document.getElementById("authForm"); // Login Page
+    const welcomeMsg = document.getElementById("welcomeMsg"); // Dashboard
 
     // -----------------------------------------------------------
-    // 🛑 I DELETED THE SECURITY CHECK. NO MORE KICKING OUT! 🛑
+    // 🛑 SECURITY CHECK REMOVED
+    // The code that forced you back to login is GONE.
+    // The page will now STAY OPEN no matter what.
     // -----------------------------------------------------------
 
-    // 3. IF ON DASHBOARD (Index.html)
+    // 3. DASHBOARD LOGIC (Index.html)
     if (welcomeMsg) {
         if (current_user) {
             welcomeMsg.innerText = `Welcome, ${current_user}! 👋`;
         } else {
-            // If storage failed, just show a generic welcome instead of kicking out
-            welcomeMsg.innerText = "Welcome, Student! 🎓";
+            // If not logged in, just say Guest (Don't kick them out)
+            welcomeMsg.innerText = "Welcome, Guest! (Open Mode)";
+            welcomeMsg.style.color = "#666";
         }
     }
 
-    // 4. LOGIN FORM LOGIC
+    // 4. LOGIN & REGISTER LOGIC (Login.html)
     if (authForm) {
         const toggleLink = document.getElementById("toggleLink");
         const formTitle = document.getElementById("formTitle");
@@ -35,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let isLoginMode = true;
 
-        // Toggle Logic
+        // Toggle Login / Register
         toggleLink.addEventListener("click", (e) => {
             e.preventDefault();
             isLoginMode = !isLoginMode;
@@ -54,26 +59,35 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // Submit Logic
+        // Handle Submit
         authForm.addEventListener("submit", (e) => {
             e.preventDefault();
+            
             let db_users = JSON.parse(localStorage.getItem("quizUsers")) || [];
             const email = document.getElementById("email").value.trim();
             const pass = document.getElementById("password").value.trim();
 
             if (isLoginMode) {
-                // Login
+                // LOGIN
                 const user = db_users.find(u => u.email === email && u.password === pass);
                 if (user) {
+                    console.log("Login Success");
                     localStorage.setItem("quizCurrentUser", user.name);
-                    // DIRECT JUMP
-                    window.location.href = "index.html";
+                    alert("Login Success! Going to Dashboard...");
+                    window.location.href = "index.html"; // Go to Dashboard
                 } else {
-                    alert("Invalid details");
+                    alert("Invalid email or password!");
                 }
             } else {
-                // Register
+                // REGISTER
                 const name = document.getElementById("fullname").value.trim();
+                if (!name || !email || !pass) { alert("Fill all fields"); return; }
+                
+                if (db_users.find(u => u.email === email)) {
+                    alert("User already exists!");
+                    return;
+                }
+                
                 db_users.push({ name, email, password: pass });
                 localStorage.setItem("quizUsers", JSON.stringify(db_users));
                 alert("Registered! Please Login.");
@@ -82,26 +96,26 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 5. LOGOUT LOGIC
+    // 5. LOGOUT BUTTON
     const btn_logout = document.getElementById("logoutBtn");
     if (btn_logout) {
         btn_logout.addEventListener("click", () => {
-            if(confirm("Logout?")) {
+            if(confirm("Are you sure you want to logout?")) {
                 localStorage.removeItem("quizCurrentUser");
                 window.location.href = "login.html";
             }
         });
     }
 
-    // 6. QUIZ LOGIC (Create & Take)
+    // 6. QUIZ FUNCTIONS (Create, List, Take)
     handleQuizLogic();
 });
 
-// Helper Function
+// --- HELPER FUNCTION ---
 function handleQuizLogic() {
     let db_questions = JSON.parse(localStorage.getItem("quizData")) || [];
 
-    // Create
+    // Create Quiz
     const form_create = document.getElementById("createForm");
     if (form_create) {
         form_create.addEventListener("submit", (e) => {
@@ -112,25 +126,26 @@ function handleQuizLogic() {
             const c = document.getElementById("optC").value;
             const d = document.getElementById("optD").value;
             const correct = document.getElementById("correct").value;
+
             db_questions.push({ question: q, a, b, c, d, correct });
             localStorage.setItem("quizData", JSON.stringify(db_questions));
-            alert("Saved!");
+            alert("Question Saved!");
             form_create.reset();
         });
     }
 
-    // List
+    // List Quiz
     const listContainer = document.getElementById("quizListContainer");
     if (listContainer) {
         if (db_questions.length > 0) {
             listContainer.innerHTML = `
-                <div class="quiz-card" style="background: white; padding: 20px; border-radius: 10px;">
-                    <h3>General Quiz</h3>
+                <div class="quiz-card" style="background: white; padding: 20px; border-radius: 10px; margin-top:20px;">
+                    <h3>🧠 General Quiz</h3>
                     <p>Total Questions: ${db_questions.length}</p>
-                    <button onclick="window.location.href='quiz.html'" class="btn primary-btn">Start Quiz</button>
+                    <button onclick="window.location.href='quiz.html'" class="btn primary-btn" style="margin-top:10px">Start Quiz</button>
                 </div>`;
         } else {
-            listContainer.innerHTML = "<p>No quizzes yet.</p>";
+            listContainer.innerHTML = "<p>No quizzes available.</p>";
         }
     }
 
@@ -142,7 +157,7 @@ function handleQuizLogic() {
         let answers = [];
 
         if (db_questions.length === 0) {
-            quizBox.innerHTML = "<h3>No quiz available.</h3>";
+            quizBox.innerHTML = "<h3>No quiz available.</h3><a href='index.html' class='btn secondary-btn'>Go Back</a>";
         } else {
             const showQuestion = () => {
                 const q = db_questions[index];
@@ -156,7 +171,7 @@ function handleQuizLogic() {
 
             document.getElementById("nextBtn").addEventListener("click", () => {
                 const selected = document.querySelector('input[name="option"]:checked');
-                if (!selected) { alert("Select option!"); return; }
+                if (!selected) { alert("Select an option!"); return; }
                 
                 answers.push(selected.value);
                 if (selected.value === db_questions[index].correct) score++;
@@ -174,27 +189,30 @@ function handleQuizLogic() {
             });
         }
     }
-
-    // Result
+    
+    // Results
     const scoreText = document.getElementById("scoreText");
     if(scoreText) {
-        scoreText.innerText = `Score: ${localStorage.getItem("finalScore")} / ${localStorage.getItem("totalQ")}`;
+        scoreText.innerText = `You scored ${localStorage.getItem("finalScore")} / ${localStorage.getItem("totalQ")}`;
         document.getElementById("reviewBtn").addEventListener("click", () => {
              const myAns = JSON.parse(localStorage.getItem("myAnswers"));
              const reviewList = document.getElementById("reviewList");
              reviewList.style.display = "block";
              reviewList.innerHTML = "";
              db_questions.forEach((q, i) => {
-                 reviewList.innerHTML += `<p>Q${i+1}: ${q.question} <br> <b>Ans: ${myAns[i]}</b> (Correct: ${q.correct})</p><hr>`;
+                 reviewList.innerHTML += `<p><b>Q${i+1}:</b> ${q.question}<br>Your Ans: ${myAns[i]} (Correct: ${q.correct})</p><hr>`;
              });
         });
     }
 
+    // Reset
     const clearBtn = document.getElementById("clearBtn");
     if (clearBtn) {
         clearBtn.addEventListener("click", () => {
-            localStorage.clear();
-            window.location.href = "login.html";
+            if(confirm("Delete all data?")) {
+                localStorage.clear();
+                window.location.href = "login.html";
+            }
         });
     }
 }
