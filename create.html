@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Quiz</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <div class="glass-container">
+        <header>
+            <h2>📝 Add Question</h2>
+        </header>
+
+        <main>
+            <form id="createForm">
+                <label>Question:</label>
+                <input type="text" id="question" placeholder="Enter question here..." required />
+
+                <div class="grid-inputs">
+                    <div><label>Option A</label><input type="text" id="optA" required /></div>
+                    <div><label>Option B</label><input type="text" id="optB" required /></div>
+                    <div><label>Option C</label><input type="text" id="optC" required /></div>
+                    <div><label>Option D</label><input type="text" id="optD" required /></div>
+                </div>
+
+                <label>Correct Answer</label>
+                <select id="correct">
+                    <option value="A">Option A</option>
+                    <option value="B">Option B</option>
+                    <option value="C">Option C</option>
+                    <option value="D">Option D</option>
+                </select>
+
+                <button type="submit" class="btn primary-btn">Save Question</button>
+                <a href="index.html" class="btn secondary-btn">Done & Go Back</a>
+
+                <footer style="margin-top: 25px; text-align: center; font-size: 0.8rem; color: #888;">
+                   Developed by Vaibhavi | CodSoft Web Development Internship
+
+                </footer>
+            </form>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

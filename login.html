@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Access - Quiz Maker</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <div class="glass-container" style="max-width: 400px; text-align: center;">
+        <header>
+            <h2 id="formTitle">🔐 Login</h2>
+        </header>
+
+        <main>
+            <form id="authForm">
+                <div id="nameField" style="display: none;">
+                    <label style="text-align: left;">Full Name:</label>
+                    <input type="text" id="fullname" placeholder="Vaibhavi" />
+                </div>
+
+                <label style="text-align: left;">Email:</label>
+                <input type="email" id="email" placeholder="student@example.com" required />
+
+                <label style="text-align: left;">Password:</label>
+                <input type="password" id="password" placeholder="******" required />
+
+                <button type="submit" class="btn primary-btn" id="submitBtn">Login</button>
+
+                <p style="margin-top: 15px; font-size: 0.9rem;">
+                    <span id="toggleText">New user?</span>
+                    <a href="#" id="toggleLink" style="color: #6c5ce7; font-weight: bold;">Register here</a>
+                </p>
+
+            </form>
+
+            <footer style="margin-top: 25px; text-align: center; font-size: 0.8rem; color: #888;">
+                Developed by Vaibhavi | CodSoft Web Development Internship
+
+            </footer>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
