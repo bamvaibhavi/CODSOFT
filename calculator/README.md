@@ -27,6 +27,7 @@ Plaintext
 ├── index.html      # Calculator layout and structure
 ├── style.css       # Visual styling and responsive design
 └── script.js      # Computational logic and event listeners
+
 📝 Internship Details
 Batch: DECEMBER B69
 
