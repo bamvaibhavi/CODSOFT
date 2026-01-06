@@ -1,4 +1,4 @@
-// --- 1. DATA (Easy to Edit) ---
+// --- 1. DATA  ---
 const skills = [
     "JavaScript", "React.js", "Node.js", "Express",
     "MongoDB", "CSS3", "HTML5", "Git", "Python", "SQL"
@@ -60,7 +60,7 @@ projects.forEach(project => {
 // Initialize Icons
 lucide.createIcons();
 
-// --- 3. GALAXY ANIMATION (The "Wow" Factor) ---
+// --- 3. GALAXY ANIMATION  ---
 const canvas = document.getElementById('galaxy-canvas');
 const ctx = canvas.getContext('2d');
 let width, height, stars = [];
@@ -116,4 +116,5 @@ window.addEventListener('scroll', () => {
 
 window.addEventListener('resize', initStars);
 initStars();
+
 animate();
