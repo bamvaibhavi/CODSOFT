@@ -9,10 +9,6 @@ CodSoft Web Development Internship – Level 2 Task
 A responsive Online Quiz Maker web application built using HTML, CSS, and Vanilla JavaScript.
 The application allows users to create quizzes, attempt them interactively, and view instant results, with data stored using the browser’s LocalStorage.
 
-🚀 Live Demo
-
-🔗 View Live Project
-
 ✨ Features
 
 Create quizzes with multiple questions and options
@@ -63,3 +59,4 @@ Web Development Intern – CodSoft
 📌 Internship Note
 
 This project was developed as part of the CodSoft Web Development Internship (December Batch – B69).
+
