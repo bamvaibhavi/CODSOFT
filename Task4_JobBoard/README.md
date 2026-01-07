@@ -71,7 +71,3 @@ Intern Name: Vaibhavi Manohar Bam
 Domain: Web Development
 
 Task Level: Level 2 Completion
-🔗 Submission Links
-LinkedIn Video: 
-
-GitHub Repository: 
