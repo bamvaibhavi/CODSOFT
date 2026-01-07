@@ -18,7 +18,7 @@ Here is the index of the projects included in this repository:
 | **Level 1** | [Personal Portfolio](./Task2_Portfolio) | HTML, CSS, JS | A personal portfolio featuring a 3D starfield canvas animation. |
 | **Level 1** | [Calculator](./Task3_Calculator) | HTML, CSS, JS | A fully functional web calculator with comprehensive error handling. |
 | **Level 2** | [Job Board (MERN)](./Task4_JobBoard) | MongoDB, Express, React, Node | A full-stack recruitment platform for employers and candidates. |
-| **Level 2** | [Quiz Maker](./Task5_QuizMaker) | React, CSS | An interactive quiz application with timer logic and score tracking. |
+| **Level 2** | [Quiz Maker](./Task5_QuizMaker) | HTML, CSS, JAVASCRIPT | An interactive quiz application with score tracking. |
 
 ## 🛠️ Technologies Used
 * **Frontend:** HTML5, CSS3, JavaScript (ES6+), React.js
