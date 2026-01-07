@@ -5,7 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #133251;
+    background-color: #4de217;
     
     font-family: 'Arial', sans-serif;
 }
@@ -28,7 +28,7 @@ body {
     text-align: right;
     margin-bottom: 25px;
     border: none;
-    background-color: #30c0b1;
+    background-color: #46d7c8;
     
     color: #ecf0f1;
     
@@ -82,11 +82,11 @@ button:active {
 
 
 .operator {
-    background-color: #f1c40f;
+    background-color: #1edcd3;
     
     color: white;
     
-    box-shadow: 0px 6px 0px #bd9b0c;
+    box-shadow: 0px 6px 0px #0cbdba;
 }
 
 
@@ -98,16 +98,16 @@ button:active {
 
 
 .equal {
-    background-color: #e74c3c;
+    background-color: #241391d5;
     
     color: white;
     
-    box-shadow: 0px 6px 0px #c0392b;
+    box-shadow: 0px 6px 0px #160356;
 }
 
 
 .equal:active {
     top: 6px;
-    box-shadow: 0px 0px 0px #c0392b;
+    box-shadow: 0px 0px 0px #ad601d;
 }
 
